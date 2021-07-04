@@ -20,7 +20,7 @@ function userList(results) {
                 <div className="ui segment">
                     <div className="ui card">
                         <div className="content">
-                            <img class="right floated mini ui image" src={user.avatar} />
+                            <img class="right floated mini ui image" src={user.avatar} alt="image" />
                             <div class="header">
                                 {user.first_name}{user.last_name}
                             </div>
