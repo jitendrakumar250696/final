@@ -8,6 +8,7 @@ const Tasks = ({ tasks, onDelete }) => {
                     <Task
 
                         key={index}
+                        index={index}
                         task={task}
                         onDelete={onDelete}
                     />
