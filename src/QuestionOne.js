@@ -18,13 +18,13 @@ const QuestionOne = () => {
     }, [])
 
     const fetchTasks = async () => {
-        const res = await fetch('http://localhost:5000/tasks')
+        const res = await fetch('/tasks')
         const data = await res.json()
         return data
     }
 
     const addTask = async (task) => {
-        const res = await fetch('http://localhost:5000/tasks', {
+        const res = await fetch('/tasks', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
@@ -38,7 +38,7 @@ const QuestionOne = () => {
 
 
     const deleteTask = async (id) => {
-        await fetch(`http://localhost:5000/tasks/${id}`, {
+        await fetch(`/tasks/${id}`, {
             method: 'DELETE',
         })
         setTasks(tasks.filter((task) => task.id !== id))
