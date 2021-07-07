@@ -42,7 +42,8 @@ const QuestionOne = () => {
 
     const fetchTasks = async () => {
         const res = await fetch('/tasks')
-        const data = await res.json()
+         let data =  JSON.parse(getCookie(key));
+       // const data = await res.json()
         return data
     }
 
@@ -68,7 +69,17 @@ const QuestionOne = () => {
         await fetch(`/tasks/${id}`, {
             method: 'DELETE',
         })
-        setTasks(tasks.filter((task) => task.id !== id))
+     
+       let data =  JSON.parse(getCookie(key));
+      
+                            if (id > -1) {
+                              data.splice(id, 1);
+                            }
+        setCookie(key, JSON.stringify(data), 24)
+        let task =  JSON.parse(getCookie(key));
+       
+        setTasks(task)
+     
     }
 
 
