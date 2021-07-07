@@ -1,6 +1,6 @@
 import React from "react";
 
-const Task = ({ task, onDelete }) => {
+const Task = ({ task, onDelete ,index}) => {
     return (
         <div>
             <h3>
@@ -8,7 +8,7 @@ const Task = ({ task, onDelete }) => {
 
                 <i className="ui  red trash alternate outline icon"
                     style={{ cursor: 'pointer' }}
-                    onClick={() => onDelete(task.id)} />
+                    onClick={() => onDelete(index)} />
 
             </h3>
             <p>{task.day}</p>
