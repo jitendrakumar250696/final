@@ -23,7 +23,7 @@ import AddTask from './AddTask'
         return c.substring(name.length, c.length)
       }
     }
-    return []
+    return JSON.stringify([])
   }
  const key = 'userData';
 const QuestionOne = () => {
@@ -33,8 +33,9 @@ const QuestionOne = () => {
     const [tasks, setTasks] = useState([])
 
     useEffect(() => {
-        const getTasks = async () => {
+        const getTasks =  () => {
           let data =  JSON.parse(getCookie(key));
+          console.log("tasks",data);
           if(data.length === 0 ){
             setCookie(key, JSON.stringify([]), 24)
           }          
@@ -62,6 +63,7 @@ const QuestionOne = () => {
         const data = await res.json()
         */
         let tasks =  JSON.parse(getCookie(key));
+        
         tasks.push(task)
         setCookie(key, JSON.stringify(tasks), 24)
         let data =  JSON.parse(getCookie(key));
