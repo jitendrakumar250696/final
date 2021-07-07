@@ -78,7 +78,7 @@ const QuestionOne = () => {
         setCookie(key, JSON.stringify(data), 24)
         let task =  JSON.parse(getCookie(key));
        
-        setTasks(task)
+        setTasks([task])
      
     }
 
