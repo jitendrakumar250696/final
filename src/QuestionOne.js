@@ -3,6 +3,29 @@ import Header from './Header'
 import Tasks from './Tasks'
 import AddTask from './AddTask'
 
+
+ const setCookie = (cname, cvalue, exdays) => {
+    const date = new Date()
+    date.setTime(date.getTime() + Number(exdays) * 3600 * 1000)
+    document.cookie = `${cname}=${cvalue}; path=/;expires = ${date.toGMTString()}`
+  }
+
+  const getCookie = cname => {
+    const name = `${cname}=`
+    const decodedCookie = decodeURIComponent(document.cookie)
+    const ca = decodedCookie.split(';')
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i]
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1)
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length)
+      }
+    }
+    return ''
+  }
+ const key = 'userData';
 const QuestionOne = () => {
 
     const [showAddTask, setShowAddTask] = useState()
@@ -24,7 +47,7 @@ const QuestionOne = () => {
     }
 
     const addTask = async (task) => {
-        const res = await fetch('/tasks', {
+       /* const res = await fetch('/tasks', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
@@ -32,7 +55,11 @@ const QuestionOne = () => {
             body: JSON.stringify(task)
         })
         const data = await res.json()
-
+        */
+        
+        setCookie(key, JSON.stringify(task), 24)
+        let data =  JSON.parse(getCookie(key));
+        console.log("data get",data);
         setTasks([...tasks, data])
     }
 
