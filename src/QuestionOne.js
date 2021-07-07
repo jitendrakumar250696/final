@@ -23,7 +23,7 @@ import AddTask from './AddTask'
         return c.substring(name.length, c.length)
       }
     }
-    return ''
+    return []
   }
  const key = 'userData';
 const QuestionOne = () => {
@@ -34,14 +34,18 @@ const QuestionOne = () => {
 
     useEffect(() => {
         const getTasks = async () => {
-            const tasksFromServer = await fetchTasks()
-            setTasks(tasksFromServer)
+          let data =  JSON.parse(getCookie(key));
+          if(data.length === 0 ){
+            setCookie(key, JSON.stringify([]), 24)
+          }          
+          setTasks(data);
+
         }
         getTasks()
     }, [])
 
     const fetchTasks = async () => {
-        const res = await fetch('/tasks')
+        //const res = await fetch('/tasks')
          let data =  JSON.parse(getCookie(key));
        // const data = await res.json()
         return data
@@ -57,24 +61,25 @@ const QuestionOne = () => {
         })
         const data = await res.json()
         */
-        let tasks =  [JSON.parse(getCookie(key))];
-        setCookie(key, JSON.stringify(tasks.push(task)), 24)
+        let tasks =  JSON.parse(getCookie(key));
+        tasks.push(task)
+        setCookie(key, JSON.stringify(tasks), 24)
         let data =  JSON.parse(getCookie(key));
-        console.log("data get",data);
+        
         setTasks(data)
     }
 
 
     const deleteTask = async (id) => {
-        await fetch(`/tasks/${id}`, {
-            method: 'DELETE',
-        })
+        
      
        let data =  JSON.parse(getCookie(key));
       
+       console.log("data",data,id);
                             if (id > -1) {
                               data.splice(id, 1);
                             }
+        console.log("data after",data,id);
         setCookie(key, JSON.stringify(data), 24)
         let task =  JSON.parse(getCookie(key));
        
