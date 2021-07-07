@@ -57,11 +57,11 @@ const QuestionOne = () => {
         })
         const data = await res.json()
         */
-        
-        setCookie(key, JSON.stringify(task), 24)
+        let tasks =  [JSON.parse(getCookie(key))];
+        setCookie(key, JSON.stringify(tasks.push(task)), 24)
         let data =  JSON.parse(getCookie(key));
         console.log("data get",data);
-        setTasks([...tasks, data])
+        setTasks(data)
     }
 
 
@@ -78,7 +78,7 @@ const QuestionOne = () => {
         setCookie(key, JSON.stringify(data), 24)
         let task =  JSON.parse(getCookie(key));
        
-        setTasks([task])
+        setTasks(task)
      
     }
 
