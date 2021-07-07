@@ -46,22 +46,14 @@ const QuestionOne = () => {
     }, [])
 
     const fetchTasks = async () => {
-        //const res = await fetch('/tasks')
+        
          let data =  JSON.parse(getCookie(key));
-       // const data = await res.json()
+     
         return data
     }
 
     const addTask = async (task) => {
-       /* const res = await fetch('/tasks', {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(task)
-        })
-        const data = await res.json()
-        */
+    
         let tasks =  JSON.parse(getCookie(key));
         
         tasks.push(task)
